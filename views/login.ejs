@@ -1,0 +1,29 @@
+<html>
+    <%- include('./partials/document/head') %>
+    <body>
+        <form class="initial-background" method="POST" action="/login">
+            <section class="input-container">
+                <div class="input-content">
+                    <label for="username">username:</label>
+                    <input type="text" id="username" class="input-input" name="username">
+                </div>
+                <div class="input-content">
+                    <label for="password">password:</label>
+                    <input type="password" id="password" class="input-input" name="password">
+                    <% if (message) { %>
+                        <p class="error"><%= message %></p>
+                    <% } %>
+                </div>
+                <div class="input-content">
+                    <button class="submit-button" type="submit">
+                        Log In
+                    </button>
+                    <div class="redirect-container">
+                        <a href="/">Continue as Guest</a>
+                        <a class="redirect-basic" href="/signup">Not a Member?</a>                  
+                    </div>
+                </div>
+            </section>
+        </form>
+    </body>
+</html>

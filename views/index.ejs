@@ -1,0 +1,38 @@
+<html>
+    <%- include('./partials/document/head') %>
+    <body>
+        <main class="main-dashboard">
+            <%- include('./partials/document/nav') %>
+            <% if(user){ %>
+                <section class="content-container">
+                    <h1 class="dash-header">MY MESSAGES</h1>
+                    <div class="dash-line"></div>
+                    <% if (messages) { %>
+                        <% messages.forEach(message => { %>
+                            <div class="message-container">
+                                <div class="message-headers">
+                                    <p>Date: <%= message.date %></p>
+                                </div>
+                                <div class="message-content">
+                                    <%= message.message %>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } %>
+                </section>
+            <% } else { %>
+                <section class="content-container">
+                    <h1 class="dash-header">Log In to see messages</h1>
+                </section>
+            <% } %>
+            <button class="create-message">
+                Create Message
+            </button>
+            <form class="create-message-container">
+                <label for="message">My Message: </label>
+                <input type="text" placeholder="Lorem Ipsum" id="message">
+                <button class="message-post">Post</button>
+            </form>
+        </main>
+    </body>
+</html>

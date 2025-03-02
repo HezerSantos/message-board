@@ -1,0 +1,51 @@
+<html>
+    <%- include('./partials/document/head') %>
+    <body>
+        <form class="initial-background" method="POST" action="/signup">
+                <section class="input-container">
+                    <div class="input-content">
+                        <label for="username">username:</label>
+                        <input type="text" id="username" class="input-input" name="username">
+                        <% if(locals.errors){ %>
+                            <% errors.forEach(error => { %>
+                                <% if (error.path === 'username'){ %>
+                                    <p class="error"> <%=error.msg %> *</p>
+                                <% } %>
+                            <% }) %>
+                        <% } %>
+                    </div>
+                    <div class="input-content">
+                        <label for="password">password:</label>
+                        <input type="password" id="password" class="input-input" name="password">
+                        <% if(locals.errors){ %>
+                            <% errors.forEach(error => { %>
+                                <% if (error.path === 'password'){ %>
+                                    <p class="error"> <%=error.msg %> *</p>
+                                <% } %>
+                            <% }) %>
+                        <% } %>
+                    </div>
+                    <div class="input-content">
+                        <label for="confirm-password">confrim password:</label>
+                        <input type="password" id="confirm-password" class="input-input" name="confirmPassword">
+                        <% if(locals.errors){ %>
+                            <% errors.forEach(error => { %>
+                                <% if (error.path === 'confirmPassword'){ %>
+                                    <p class="error"> <%=error.msg %> *</p>
+                                <% } %>
+                            <% }) %>
+                        <% } %>
+                    </div>
+                    <div class="input-content">
+                        <button class="submit-button" type="submit">
+                            Sign Up
+                        </button>
+                        <div class="redirect-container">
+                            <a href="/">Continue as Guest</a>
+                            <a class="redirect-basic" href="/login">Already a Member?</a>                  
+                        </div>
+                    </div>
+                </section>
+        </form>
+    </body>
+</html>

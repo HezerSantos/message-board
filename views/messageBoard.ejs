@@ -1,0 +1,57 @@
+<html>
+    <%- include('./partials/document/head') %>
+    <body>
+        <main class="all-messages">
+            <%- include('./partials/document/nav') %>
+            <section class="content-container">
+                <h1 class="dash-header">COMMUNITY MESSAGES</h1>
+                <div class="dash-line"></div>
+                <% if (user) { %>
+                    <% if (user.member) { %>
+                        <% if (messages) { %>
+                            <% messages.forEach(message => { %>
+                                <div class="message-container">
+                                    <div class="message-headers">
+                                        <p>Date: <%= message.date %></p>
+                                        <p>Author: <%=message.username %></p>
+                                    </div>
+                                    <div class="message-content">
+                                        <%= message.message %>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        <% } %>
+                    <% } else { %>
+                        <% if (messages) { %>
+                            <% messages.forEach(message => { %>
+                                <div class="message-container">
+                                    <div class="message-headers">
+                                        <p>Date: Anonymous</p>
+                                        <p>Author: Anonymous</p>
+                                    </div>
+                                    <div class="message-content">
+                                        <%= message.message %>
+                                    </div>
+                                </div>
+                            <% }) %>
+                        <% } %>
+                    <% } %>
+                <% } else { %>
+                    <% if (messages) { %>
+                        <% messages.forEach(message => { %>
+                            <div class="message-container">
+                                <div class="message-headers">
+                                    <p>Date: Anonymous</p>
+                                    <p>Author: Anonymous</p>
+                                </div>
+                                <div class="message-content">
+                                    <%= message.message %>
+                                </div>
+                            </div>
+                        <% }) %>
+                    <% } %>
+                <% } %>
+            </section>
+        </main>
+    </body>
+</html>
