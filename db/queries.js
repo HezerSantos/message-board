@@ -55,9 +55,17 @@ async function getAllMessages(){
     return rows
 }
 
+async function postMessage(userId, message, date){
+    await pool.query(`
+        INSERT INTO MESSAGES(userid, message, date)
+        VALUES ($1, $2, $3)
+    `, [userId, message, date])
+}
+
 module.exports = {
     signUpUser,
     checkDuplicateUser,
     getUserMessages,
-    getAllMessages
+    getAllMessages,
+    postMessage
 }

@@ -19,20 +19,14 @@
                             </div>
                         <% }) %>
                     <% } %>
+                    <%- include('./partials/createMessageInput') %>
                 </section>
             <% } else { %>
                 <section class="content-container">
                     <h1 class="dash-header">Log In to see messages</h1>
+                    <%- include('./partials/createMessageInput') %>
                 </section>
             <% } %>
-            <button class="create-message">
-                Create Message
-            </button>
-            <form class="create-message-container">
-                <label for="message">My Message: </label>
-                <input type="text" placeholder="Lorem Ipsum" id="message">
-                <button class="message-post">Post</button>
-            </form>
         </main>
     </body>
 </html>

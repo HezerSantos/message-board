@@ -16,16 +16,12 @@ const indexRouter = require("./routes/indexRouter");
 const session = require("express-session");
 const passport = require("./passport");
 const messageBoardRouter = require("./routes/messageBoardRouter");
+const createMessageRouter = require("./routes/createMessageRouter");
 
 app.use(session({ secret: "cat", resave: false, saveUninitialized: false, cookie: { secure: false } }));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
-
-
-
-  
-
 
   app.use((req, res, next) => {
     res.locals.currentUser = req.user;
@@ -33,11 +29,12 @@ app.use(express.urlencoded({ extended: false }));
   });
 
 
-
 app.use("/", indexRouter)
 app.use("/login", loginRouter)
 app.use("/signup", signUpRouter)
 app.use("/message-board", messageBoardRouter)
+app.use("/create-message", createMessageRouter)
+
 app.get("/log-out", (req, res, next) => {
   req.logout((err) => {
     if (err) {

@@ -124,7 +124,7 @@ button{
     justify-self: center
 }
 
-.log-out{
+.log-out, .create-message{
     grid-area: 6 / 1 / 7 / 3;
     align-self: center;
     justify-self: center;
@@ -135,6 +135,7 @@ button{
     justify-content: center;
     align-items: center;
     border-radius: 1.25rem;
+    border: 1px solid white;
 }
 
 .licon{
@@ -164,6 +165,9 @@ button{
     display: grid;
     grid-template-columns: 1fr;
 }
+.create-message{
+    grid-area: 5 / 1 / 6 / 3;
+}
 
 .toggle-nav > *{
     grid-area: auto;
@@ -180,40 +184,17 @@ button{
     width: 3.125rem;
     grid-row: 6 / 7;
 }
-
+.toggle-create-message{
+    width: 3.125rem;
+    grid-row: 5 / 6;
+}
 .toggle-button{
     display: none;
 }
-@media (max-width: 900px){
-    .main-nav{
-        width: 6.25rem;
-        display: grid;
-        grid-template-columns: 1fr;
-        grid-template-rows: repeat(5, 1fr);
-    }
 
-    .main-nav > *{
-        grid-area: auto;
-    }
-    .nav-link{
-        display: none;
-    }
-    .close-nav{
-        display: none;
-    }
-    .log-out{
-        width: 3.125rem;
-        grid-row: 5 / 6;
-    }
-    .log-out-message{
-        display: none;
-    }
-    .log-out-image{
-        display: inline;
-    }
-}
 
 .content-container{
+    position: relative;
     padding: 3rem 10% 3rem 10%;
     display: flex;
     flex-direction: column;
@@ -253,16 +234,26 @@ button{
     gap: 1rem;
 }
 
-.create-message, .message-post{
-    position: absolute;
+.message-post{
     background-color: var(--button-color);
     width: 13.25rem;
     height: 3.125rem;
-    bottom: 5%;
-    right: 10%;
     border: none;
     border-radius: 1.25rem;
     border: 1px solid white;
+}
+
+.close-message{
+    height: 3.125rem;
+    width: 3.125rem;
+    background-color: rgb(158, 15, 15);
+    border: 1px solid white;
+    border-radius: 1.25rem;
+}
+
+.close-message > *{
+    width: 80%;
+    fill: white;
 }
 
 .create-message-container{
@@ -281,17 +272,67 @@ button{
     padding: 3rem;
     width: clamp(17.3125rem, 50vw, 34rem);
     border-radius: 1.25rem;
+    visibility: hidden;
 }
 
-.create-message-container input{
-    height: 35rem;
+.create-message-container textarea{
+    height: 15rem;
     border-radius: 1.25rem;
     background-color: var(--p-bg);
     border: 1px solid white;
     width: 100%;
+    resize: none;
+    padding: 1rem;
+    display: flex;
 }
 
-.message-post{
-    position: relative;
-    inset: 0;
+.create-message-container textarea::placeholder{
+    text-align: center;
+}
+
+.message-button-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.toggle-popup{
+    visibility: visible;
+}
+
+@media (max-width: 900px){
+    .main-nav{
+        width: 6.25rem;
+        display: grid;
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(5, 1fr);
+    }
+
+    .main-nav > *{
+        grid-area: auto;
+    }
+    .nav-link{
+        display: none;
+    }
+    .close-nav{
+        display: none;
+    }
+    .log-out{
+        width: 3.125rem;
+        grid-row: 5 / 6;
+    }
+    .log-out-message, .create-message-message{
+        display: none;
+    }
+    .log-out-image, .create-message-image{
+        display: inline;
+    }
+    .create-message{
+        width: 3.125rem;
+        grid-row: 4 / 5;
+    }
+    .message-button-container{
+        flex-direction: column;
+    }
 }
