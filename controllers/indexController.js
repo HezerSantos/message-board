@@ -8,10 +8,14 @@ exports.getDashBoard = async(req, res) => {
             const date = new Date(message.date)
             message.date = date.toLocaleString()
         })
-        // console.log(messages)
+        if (messages.length === 0){
+            messages = null
+        }
     }
     res.render("index", { 
         user: req.user,
         messages: messages,
+        errors: null,
+        req: req
     })
 }

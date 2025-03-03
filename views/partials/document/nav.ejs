@@ -4,22 +4,24 @@
         <svg class="open toggle-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>menu-close</title><path d="M3 6H13V8H3V6M3 16H13V18H3V16M3 11H15V13H3V11M16 7L14.58 8.39L18.14 12L14.58 15.61L16 17L21 12L16 7Z" fill="white"/></svg>
     </button>
     <a href="/" class="iicon dash-board">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>view-dashboard-outline</title><path d="M19,5V7H15V5H19M9,5V11H5V5H9M19,13V19H15V13H19M9,17V19H5V17H9M21,3H13V9H21V3M11,3H3V13H11V3M21,11H13V21H21V11M11,15H3V21H11V15Z" fill="white" /></svg>
+        <svg class="icon <%= req.originalUrl === '/' ? 'select' : '' %>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>view-dashboard-outline</title><path d="M19,5V7H15V5H19M9,5V11H5V5H9M19,13V19H15V13H19M9,17V19H5V17H9M21,3H13V9H21V3M11,3H3V13H11V3M21,11H13V21H21V11M11,15H3V21H11V15Z"/></svg>
     </a>
-    <a href="/" class="nav-link dash-text">My Dashboard</a>
+    <a href="/" class="nav-link dash-text <%= req.originalUrl === '/' ? 'select' : '' %>">My Dashboard</a>
+
     <a href="/message-board" class="iicon message-board">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>message-badge-outline</title><path d="M22 7V16C22 17.1 21.1 18 20 18H6L2 22V4C2 2.9 2.9 2 4 2H14.1C14 2.3 14 2.7 14 3S14 3.7 14.1 4H4V16H20V7.9C20.7 7.8 21.4 7.4 22 7M16 3C16 4.7 17.3 6 19 6S22 4.7 22 3 20.7 0 19 0 16 1.3 16 3Z" fill="white" /></svg>
+        <svg class="icon <%= req.originalUrl === '/message-board' ? 'select' : '' %>" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>message-badge-outline</title><path d="M22 7V16C22 17.1 21.1 18 20 18H6L2 22V4C2 2.9 2.9 2 4 2H14.1C14 2.3 14 2.7 14 3S14 3.7 14.1 4H4V16H20V7.9C20.7 7.8 21.4 7.4 22 7M16 3C16 4.7 17.3 6 19 6S22 4.7 22 3 20.7 0 19 0 16 1.3 16 3Z"/></svg>
     </a>
-    <a href="/message-board" class="nav-link message-text">Message board</a>
-    <a href="" class="iicon join-club">
-        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>cards-playing-club</title><path d="M17 2H7C5.9 2 5 2.9 5 4V20C5 21.1 5.9 22 7 22H17C18.1 22 19 21.1 19 20V4C19 2.9 18.1 2 17 2M14 15C13.4 15 12.9 14.7 12.5 14.3L13.5 17H10.5L11.5 14.3C11.1 14.7 10.6 15 10 15C8.9 15 8 14.1 8 13S8.9 11 10 11H10.3C10.1 10.7 10 10.3 10 10C10 8.9 10.9 8 12 8S14 8.9 14 10C14 10.4 13.9 10.7 13.7 11H14C15.1 11 16 11.9 16 13S15.1 15 14 15Z" fill="white" /></svg>
+    <a href="/message-board" class="nav-link message-text <%= req.originalUrl === '/message-board' ? 'select' : '' %>">Message board</a>
+
+    <a href="" class="iicon join-club ">
+        <svg class="icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>cards-playing-club</title><path d="M17 2H7C5.9 2 5 2.9 5 4V20C5 21.1 5.9 22 7 22H17C18.1 22 19 21.1 19 20V4C19 2.9 18.1 2 17 2M14 15C13.4 15 12.9 14.7 12.5 14.3L13.5 17H10.5L11.5 14.3C11.1 14.7 10.6 15 10 15C8.9 15 8 14.1 8 13S8.9 11 10 11H10.3C10.1 10.7 10 10.3 10 10C10 8.9 10.9 8 12 8S14 8.9 14 10C14 10.4 13.9 10.7 13.7 11H14C15.1 11 16 11.9 16 13S15.1 15 14 15Z"/></svg>
     </a>
     <a href="" class="nav-link club-text">Join the Club</a>
     <button class="create-message" id="create-message">
         <span class="create-message-message">
             Create Message
         </span>
-        <svg class="iicon create-message-image toggle-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>pencil</title><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" fill="white" /></svg>
+        <svg class="iicon create-message-image toggle-button" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><title>pencil</title><path d="M20.71,7.04C21.1,6.65 21.1,6 20.71,5.63L18.37,3.29C18,2.9 17.35,2.9 16.96,3.29L15.12,5.12L18.87,8.87M3,17.25V21H6.75L17.81,9.93L14.06,6.18L3,17.25Z" fill="white"/></svg>
     </button>
     <a href="/log-out" class="log-out">
         <span class="log-out-message">

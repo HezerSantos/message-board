@@ -5,6 +5,7 @@ exports.getMessageBoard = async(req, res) => {
     // console.log(messages)
     res.render("messageBoard", {
         user: req.user,
-        messages: messages
+        messages: messages,
+        req: req,
     })
 }

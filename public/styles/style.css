@@ -109,7 +109,9 @@ button{
     background-color: transparent;
 }
 
-
+.icon{
+    fill: white;
+}
 .nav-link{
     align-self: center;
 }
@@ -299,6 +301,28 @@ button{
 
 .toggle-popup{
     visibility: visible;
+}
+
+.error-container{
+    visibility: visible;
+    animation: fadeOut 3.5s forwards;
+}
+
+.select{
+    fill: var(--button-color);
+    color: var(--button-color);
+}
+
+@keyframes fadeOut{
+    0%{
+        opacity: 0;
+    }
+    50%{
+        opacity: 100%;
+    }
+    100%{
+        opacity: 0;
+    }
 }
 
 @media (max-width: 900px){

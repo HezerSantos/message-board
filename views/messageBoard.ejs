@@ -20,6 +20,8 @@
                                     </div>
                                 </div>
                             <% }) %>
+                        <%} else { %>
+                            <h1>No Messages Yet!</h1>
                         <% } %>
                     <% } else { %>
                         <% if (messages) { %>
@@ -34,6 +36,8 @@
                                     </div>
                                 </div>
                             <% }) %>
+                        <%} else { %>
+                            <h1>No Messages Yet!</h1>
                         <% } %>
                     <% } %>
                 <% } else { %>
@@ -49,6 +53,8 @@
                                 </div>
                             </div>
                         <% }) %>
+                    <%} else { %>
+                        <h1>No Messages Yet!</h1>
                     <% } %>
                 <% } %>
                 <%- include('./partials/createMessageInput') %>
