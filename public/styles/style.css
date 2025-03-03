@@ -204,7 +204,9 @@ button{
     align-items: center;
     overflow: auto;
     gap: 1.5rem;
-
+}
+.content-container::-webkit-scrollbar, .message-container::-webkit-scrollbar{
+    display: none;
 }
 
 .dash-header{
@@ -357,6 +359,9 @@ button{
         grid-row: 4 / 5;
     }
     .message-button-container{
+        flex-direction: column;
+    }
+    .message-headers{
         flex-direction: column;
     }
 }

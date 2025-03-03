@@ -7,11 +7,20 @@ exports.createMessage = [
     async(req, res) => {
         const errors = validationResult(req)
         let messages = null
+        const options = {
+            year: 'numeric',
+            month: '2-digit',
+            day: '2-digit',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false,  // 24-hour format
+          };
         if (req.user){
             messages = await db.getUserMessages(req.user.id)
             messages.forEach(message => {
                 const date = new Date(message.date)
-                message.date = date.toLocaleString()
+                message.date = date.toLocaleString('sv-SE', options).replace(',', '')
             })
             if (messages.length === 0){
                 messages = null
