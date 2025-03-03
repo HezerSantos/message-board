@@ -82,7 +82,7 @@ button{
     color: rgb(255, 0, 0);
 }
 
-.main-dashboard, .all-messages{
+.main-dashboard, .all-messages, .club-dash{
     min-height: fit-content;
     height: 100vh;
     background: linear-gradient(to bottom, var(--s-bg) 35%, var(--p-bg) 100%);
@@ -126,7 +126,7 @@ button{
     justify-self: center
 }
 
-.log-out, .create-message{
+.log-out, .create-message, .check-code{
     grid-area: 6 / 1 / 7 / 3;
     align-self: center;
     justify-self: center;
@@ -315,6 +315,41 @@ button{
     color: var(--button-color);
 }
 
+.club-container{
+    justify-content: center;
+}
+.club-message-container{
+    padding: 1.5rem;
+    width: clamp(17.3125rem, 50vw, 34rem);
+    background-color: var(--p-cc);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    border-radius: 1.25rem;
+    border: 1px solid white;
+}
+.club-message-container input{
+    width: clamp(12rem, 15vw, 22.5rem);
+    padding: 1rem;
+    background-color: var(--p-bg);
+    border-radius: 1.25rem;
+    border: 1px solid white;
+}
+
+.check-code{
+    width: clamp(12rem, 15vw, 22.5rem);
+}
+li{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+li > *{
+    margin-left: auto;
+}
 @keyframes fadeOut{
     0%{
         opacity: 0;

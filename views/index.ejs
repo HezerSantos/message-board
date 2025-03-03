@@ -22,7 +22,7 @@
                         <h1>No Messages Yet!</h1>
                     <% } %>
                     <%- include('./partials/createMessageInput') %>
-                    <% if (errors) { %>
+                    <% if(errors) { %>
                         <div class="create-message-container error-container fade-in-out">
                             <% errors.forEach(error => { %>
                                 <p><%= error.msg %></p>

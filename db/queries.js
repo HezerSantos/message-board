@@ -36,8 +36,7 @@ async function getUserMessages(userId) {
             return null
         }
     } catch (e) {
-        console.error("Error executing query: ", e.message);  
-        console.error("Detailed error:", e);                 
+           
     }
 }
 
@@ -62,10 +61,18 @@ async function postMessage(userId, message, date){
     `, [userId, message, date])
 }
 
+async function becomeMember(userID) {
+    await pool.query(`
+        UPDATE USERS
+        SET member = true
+        WHERE id = $1
+    `, [userID])
+}
 module.exports = {
     signUpUser,
     checkDuplicateUser,
     getUserMessages,
     getAllMessages,
-    postMessage
+    postMessage,
+    becomeMember
 }
