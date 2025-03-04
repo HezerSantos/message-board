@@ -3,6 +3,7 @@
     <body>
         <main class="main-dashboard">
             <%- include('./partials/document/nav') %>
+            <%- include('./partials/document/snav') %>
             <div class="filler"></div>
             <% if(user){ %>
                 <section class="content-container">
@@ -33,7 +34,7 @@
                 </section>
             <% } else { %>
                 <section class="content-container">
-                    <h1 class="dash-header">Log In to see messages</h1>
+                    <h1 class="dash-header overwrite">Log In to see messages</h1>
                     <%- include('./partials/createMessageInput') %>
                 </section>
             <% } %>
