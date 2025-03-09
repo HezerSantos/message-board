@@ -2,6 +2,7 @@ const express = require("express")
 const app = express()
 const path = require('path');
 const assetsPath = path.join(__dirname, "public")
+const helmet = require('helmet');
 app.use(express.static(assetsPath));
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
@@ -20,15 +21,21 @@ const createMessageRouter = require("./routes/createMessageRouter");
 const clubRouter = require("./routes/clubRouter");
 const mobileCMRouter = require("./routes/mobileCMRouter");
 
-app.use(session({ secret: "cat", resave: false, saveUninitialized: false, cookie: { secure: false } }));
+app.use(helmet());
+app.use(session({ 
+  secret: process.env.SESSION_SECRET, 
+  resave: false, saveUninitialized: false,
+  cookie: {
+    secure: process.env.NODE_ENV === 'production',  // Only use secure cookies in production
+    httpOnly: true,  // Prevents JavaScript access to the cookie (helps prevent XSS)
+    sameSite: 'strict'  // Helps prevent CSRF attacks
+  }
+
+}));
 app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.urlencoded({ extended: false }));
 
-  app.use((req, res, next) => {
-    res.locals.currentUser = req.user;
-    next();
-  });
 
 
 app.use("/", indexRouter)
