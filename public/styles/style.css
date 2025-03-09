@@ -484,7 +484,7 @@ li > *{
 }
 
 .grow{
-    height: calc(100vh - 3rem);
+    height: calc(100svh - 3rem);
     transition: height .1s ease-in-out;
 }
 
