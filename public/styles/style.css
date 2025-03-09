@@ -82,7 +82,7 @@ button{
     color: rgb(255, 0, 0);
 }
 
-.main-dashboard, .all-messages, .club-dash{
+.main-dashboard, .all-messages, .club-dash, .mobile-CM{
     min-height: fit-content;
     height: 100vh;
     background: linear-gradient(to bottom, var(--s-bg) 35%, var(--p-bg) 100%);
@@ -204,6 +204,7 @@ button{
     align-items: center;
     overflow: auto;
     gap: 1.5rem;
+    height: 100vh;
 }
 .content-container::-webkit-scrollbar, .message-container::-webkit-scrollbar{
     display: none;
@@ -215,13 +216,13 @@ button{
 
 .dash-line{
     width: clamp(17.3125rem, 100%, 73.4375rem);
-    height: 1px;
+    min-height: 1px;
     background-color: white;
 }
 
 .message-container{
     width: clamp(17.3125rem, 100%, 73.4375rem);
-    max-height: 12.5rem;
+    min-height: 12.5rem;
     overflow-y: auto;
     background-color: var(--p-cc);
     border: 1px solid white;
@@ -445,9 +446,7 @@ li > *{
     fill: white;
 }
 
-.dash-header, .dash-line{
-    display: none;
-}
+
 
 .overwrite{
     display: inline;
@@ -500,16 +499,27 @@ li > *{
     grid-area: 5 / 1 / 6 / 3;
 }
 
+.mobile-CMC{
+    visibility: visible;
+}
+
 @media (max-width: 600px){
+    .dash-header, .dash-line{
+        display: none;
+    }
+
+    .overwrite{
+        display: inline;
+        font-size: 2rem;
+    }
+    
     .main-dashboard, .all-messages, .club-dash{
         flex-direction: column;
     }
     .main-nav{
         display: none;
     }
-    .create-message-container{
-        display: none;
-    }
+
     .second-nav{
         display: inline;
     }

@@ -49,6 +49,7 @@ async function getAllMessages(){
             users.username
         FROM MESSAGES
         JOIN USERS ON messages.userID = users.id
+        ORDER BY messages.messageID DESC
     `)
 
     return rows

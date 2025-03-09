@@ -18,6 +18,7 @@ const passport = require("./passport");
 const messageBoardRouter = require("./routes/messageBoardRouter");
 const createMessageRouter = require("./routes/createMessageRouter");
 const clubRouter = require("./routes/clubRouter");
+const mobileCMRouter = require("./routes/mobileCMRouter");
 
 app.use(session({ secret: "cat", resave: false, saveUninitialized: false, cookie: { secure: false } }));
 app.use(passport.initialize());
@@ -36,6 +37,7 @@ app.use("/signup", signUpRouter)
 app.use("/message-board", messageBoardRouter)
 app.use("/create-message", createMessageRouter)
 app.use("/club-dash", clubRouter)
+app.use("/mcreate-message", mobileCMRouter)
 app.get("/log-out", (req, res, next) => {
   req.logout((err) => {
     if (err) {
