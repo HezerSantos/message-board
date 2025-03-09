@@ -29,6 +29,9 @@ button{
     cursor: pointer;
 }
 
+body{
+    background-color: var(--p-cc);
+}
 .initial-background{
     background: linear-gradient(to bottom, var(--p-bg) 55%, var(--s-bg)) 100%;
     height: 100svh;
@@ -40,7 +43,7 @@ button{
 }
 
 .input-container{
-    width: clamp(17.85rem, 25vw, 31.25rem);
+    width: clamp(17.85rem, 25svw, 31.25rem);
     height: clamp(37.5rem, 65svh, 45.625rem);
     background-color: var(--p-cc);
     border-radius: 1.5625rem;
@@ -131,7 +134,7 @@ button{
     align-self: center;
     justify-self: center;
     background-color: var(--button-color);
-    width: clamp(3.125rem, 15vw, 13.25rem);
+    width: clamp(3.125rem, 15svw, 13.25rem);
     height: 3.125rem;
     display: flex;
     justify-content: center;
@@ -275,7 +278,7 @@ button{
     justify-content: center;
     gap: 1rem;
     padding: 3rem;
-    width: clamp(17.3125rem, 50vw, 34rem);
+    width: clamp(17.3125rem, 50svw, 34rem);
     border-radius: 1.25rem;
     visibility: hidden;
 }
@@ -321,7 +324,7 @@ button{
 }
 .club-message-container{
     padding: 1.5rem;
-    width: clamp(17.3125rem, 50vw, 34rem);
+    width: clamp(17.3125rem, 50svw, 34rem);
     background-color: var(--p-cc);
     display: flex;
     flex-direction: column;
@@ -332,7 +335,7 @@ button{
     border: 1px solid white;
 }
 .club-message-container input{
-    width: clamp(12rem, 15vw, 22.5rem);
+    width: clamp(12rem, 15svw, 22.5rem);
     padding: 1rem;
     background-color: var(--p-bg);
     border-radius: 1.25rem;
@@ -340,7 +343,7 @@ button{
 }
 
 .check-code{
-    width: clamp(12rem, 15vw, 22.5rem);
+    width: clamp(12rem, 15svw, 22.5rem);
 }
 li{
     display: flex;
@@ -420,7 +423,7 @@ li > *{
 .second-nav{
     position: fixed;
     background-color: var(--nav-cc);
-    width: 100vw;
+    width: 100svw;
     transition: none;
     z-index: 2;
     display: flex;
@@ -455,7 +458,7 @@ li > *{
 
 .snav-content{
     height: 0;
-    width: 100vw;
+    width: 100svw;
     background-color: var(--nav-cc);
     display: grid;
     grid-template-columns: 1fr 1fr;
