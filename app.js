@@ -8,7 +8,7 @@ app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
 app.use(express.urlencoded({ extended: true }));
 require('dotenv').config();
-
+const rateLimit = require('express-rate-limit');
 const loginRouter = require("./routes/loginRouter");
 const signUpRouter = require("./routes/signupRouter");
 const indexRouter = require("./routes/indexRouter");
@@ -34,17 +34,28 @@ app.use(session({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use(express.urlencoded({ extended: false }));
+const limiter = rateLimit({
+  windowMs: 60 * 15000, // 1 minute window
+  max: 5, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests, please try again later.',
+  headers: true, // Add rate limit info to response headers
+});
 
+const auth = rateLimit({
+  windowMs: 60 * 15000, // 1 minute window
+  max: 3, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests, please try again later.',
+  headers: true, // Add rate limit info to response headers
+});
 
 
 app.use("/", indexRouter)
-app.use("/login", loginRouter)
-app.use("/signup", signUpRouter)
+app.use("/login", auth, loginRouter)
+app.use("/signup", auth, signUpRouter)
 app.use("/message-board", messageBoardRouter)
-app.use("/create-message", createMessageRouter)
+app.use("/create-message", limiter, createMessageRouter)
 app.use("/club-dash", clubRouter)
-app.use("/mcreate-message", mobileCMRouter)
+app.use("/mcreate-message", limiter, mobileCMRouter)
 app.get("/log-out", (req, res, next) => {
   req.logout((err) => {
     if (err) {
