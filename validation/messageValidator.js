@@ -3,6 +3,6 @@ const { body, validationResult } = require("express-validator");
 exports.validateMessage =[
     body("message")
         .trim()
-        .notEmpty().withMessage("Message cannot be empty")
+        .isLength({min: 10}).withMessage("Message Cannot be Empty")
         .escape()
 ]
