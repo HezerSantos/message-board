@@ -29,6 +29,7 @@ function checkOrigin(req, res, next) {
   if (origin && origin.startsWith(allowedDomain)) {
     return next(); // Allow the request to proceed
   } else {
+    console.log(origin)
     return res.status(403).json({ error: 'Forbidden: Invalid Origin' }); // Reject the request
   }
 }
