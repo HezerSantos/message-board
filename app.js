@@ -3,6 +3,7 @@ const app = express()
 const path = require('path');
 const assetsPath = path.join(__dirname, "public")
 const helmet = require('helmet');
+app.set('trust proxy', 1);
 app.use(express.static(assetsPath));
 app.set("views", path.join(__dirname, "views"))
 app.set("view engine", "ejs")
@@ -24,19 +25,34 @@ const e = require("express");
 
 function checkOrigin(req, res, next) {
   const allowedDomain = "https://message-board-mem.up.railway.app"; 
-  const origin = req.get('Origin') || req.get('Referer'); 
-
-  // Allow same-origin requests (where Origin is null or not set)
-  if (!origin || origin === 'null' || origin.startsWith(allowedDomain)) {
-    return next(); 
-  } else {
-    console.log("Headers:", req.headers)
-    console.log(`Blocked request with origin: ${origin}`);
-    return res.status(403).json({ error: 'Forbidden: Invalid Origin' });
+  const origin = req.get('Origin');
+  const referer = req.get('Referer');
+  
+  // Allow requests with no origin (like same-origin requests)
+  if (!origin && !referer) {
+    return next();
   }
+  
+  // Check origin header
+  if (origin) {
+    // Use exact matching or URL parsing for proper comparison
+    if (origin === allowedDomain || new URL(origin).origin === allowedDomain) {
+      return next();
+    }
+  }
+  
+  // Check referer as fallback
+  if (referer && new URL(referer).origin === allowedDomain) {
+    return next();
+  }
+  
+  // Log and block the request
+  console.log("Headers:", req.headers);
+  console.log(`Blocked request with origin: ${origin}, referer: ${referer}`);
+  return res.status(403).json({ error: 'Forbidden: Invalid Origin' });
 }
 
-app.use(checkOrigin)
+app.use(checkOrigin);
 
 app.use(helmet());
 app.use(session({ 
@@ -58,6 +74,10 @@ const limiter = rateLimit({
   headers: true, // Add rate limit info to response headers
   handler: (req, res) => {
     res.status(429).render("error")
+  },
+  keyGenerator: (req) => {
+    // Use forwarded IP if available, fallback to direct IP
+    return req.ip || req.connection.remoteAddress;
   }
 });
 
@@ -68,6 +88,10 @@ const loginLimiter = rateLimit({
   headers: true, // Add rate limit info to response headers
   handler: (req, res) => {
     res.status(429).render("error")
+  },
+  keyGenerator: (req) => {
+    // Use forwarded IP if available, fallback to direct IP
+    return req.ip || req.connection.remoteAddress;
   }
 });
 
@@ -78,6 +102,10 @@ const signupLimiter = rateLimit({
   headers: true, // Add rate limit info to response headers
   handler: (req, res) => {
     res.status(429).render("error")
+  },
+  keyGenerator: (req) => {
+    // Use forwarded IP if available, fallback to direct IP
+    return req.ip || req.connection.remoteAddress;
   }
 });
 
