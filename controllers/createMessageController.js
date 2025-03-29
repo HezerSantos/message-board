@@ -36,6 +36,7 @@ exports.createMessage = [
             })
         }
         const { message } = req.body
+        console.log(message.length)
         const date = new Date()
         await db.postMessage(req.user.id, message, date.toISOString())
         res.redirect("/")
