@@ -39,6 +39,9 @@ const limiter = rateLimit({
   max: 5, // Limit each IP to 100 requests per windowMs
   message: 'Too many requests, please try again later.',
   headers: true, // Add rate limit info to response headers
+  handler: (req, res) => {
+    res.status(429).render("error")
+  }
 });
 
 const loginLimiter = rateLimit({
@@ -46,6 +49,9 @@ const loginLimiter = rateLimit({
   max: 5, // Limit each IP to 100 requests per windowMs
   message: 'Too many requests, please try again later.',
   headers: true, // Add rate limit info to response headers
+  handler: (req, res) => {
+    res.status(429).render("error")
+  }
 });
 
 const signupLimiter = rateLimit({
@@ -53,6 +59,9 @@ const signupLimiter = rateLimit({
   max: 5, // Limit each IP to 100 requests per windowMs
   message: 'Too many requests, please try again later.',
   headers: true, // Add rate limit info to response headers
+  handler: (req, res) => {
+    res.status(429).render("error")
+  }
 });
 
 
