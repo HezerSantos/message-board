@@ -41,17 +41,24 @@ const limiter = rateLimit({
   headers: true, // Add rate limit info to response headers
 });
 
-const auth = rateLimit({
-  windowMs: 60 * 15000, // 1 minute window
-  max: 3, // Limit each IP to 100 requests per windowMs
+const loginLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute window
+  max: 5, // Limit each IP to 100 requests per windowMs
+  message: 'Too many requests, please try again later.',
+  headers: true, // Add rate limit info to response headers
+});
+
+const signupLimiter = rateLimit({
+  windowMs: 60 * 1000, // 1 minute window
+  max: 5, // Limit each IP to 100 requests per windowMs
   message: 'Too many requests, please try again later.',
   headers: true, // Add rate limit info to response headers
 });
 
 
 app.use("/", indexRouter)
-app.use("/login", auth, loginRouter)
-app.use("/signup", auth, signUpRouter)
+app.use("/login", loginLimiter, loginRouter)
+app.use("/signup", signupLimiter, signUpRouter)
 app.use("/message-board", messageBoardRouter)
 app.use("/create-message", limiter, createMessageRouter)
 app.use("/club-dash", clubRouter)
