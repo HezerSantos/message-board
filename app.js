@@ -26,18 +26,13 @@ function checkOrigin(req, res, next) {
   const allowedDomain = "https://message-board-mem.up.railway.app"; 
   const origin = req.get('Origin') || req.get('Referer'); 
 
-  // Allow same-origin requests (without Origin or Referer)
-  if (!origin) {
+  // Allow same-origin requests (where Origin is null or not set)
+  if (!origin || origin === 'null' || origin.startsWith(allowedDomain)) {
     return next(); 
-  }
-
-  // Check if the Origin or Referer matches the allowed domain
-  if (origin.startsWith(allowedDomain)) {
-    return next(); // Allow the request to proceed
   } else {
     console.log("Headers:", req.headers)
     console.log(`Blocked request with origin: ${origin}`);
-    return res.status(403).json({ error: 'Forbidden: Invalid Origin' }); 
+    return res.status(403).json({ error: 'Forbidden: Invalid Origin' });
   }
 }
 
