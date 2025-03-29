@@ -33,19 +33,28 @@ function checkOrigin(req, res, next) {
     return next();
   }
   
-  // Check origin header
-  if (origin) {
-    // Use exact matching or URL parsing for proper comparison
-    if (origin === allowedDomain || new URL(origin).origin === allowedDomain) {
-      return next();
+  try {
+    // Check origin header
+    if (origin) {
+      // Ensure the origin is a valid URL before using it
+      const originUrl = new URL(origin); // Will throw if invalid
+      if (origin === allowedDomain || originUrl.origin === allowedDomain) {
+        return next();
+      }
     }
+    
+    // Check referer as fallback
+    if (referer) {
+      const refererUrl = new URL(referer); // Will throw if invalid
+      if (refererUrl.origin === allowedDomain) {
+        return next();
+      }
+    }
+  } catch (error) {
+    // If URL parsing fails, log the error and block the request
+    console.log("Invalid URL in headers:", error.message);
   }
-  
-  // Check referer as fallback
-  if (referer && new URL(referer).origin === allowedDomain) {
-    return next();
-  }
-  
+
   // Log and block the request
   console.log("Headers:", req.headers);
   console.log(`Blocked request with origin: ${origin}, referer: ${referer}`);
@@ -68,7 +77,7 @@ app.use(session({
 app.use(passport.initialize());
 app.use(passport.session());
 const limiter = rateLimit({
-  windowMs: 60 * 15000, // 1 minute window
+  windowMs: 60 * 15000, 
   max: 5, // Limit each IP to 100 requests per windowMs
   message: 'Too many messages, please try again later.',
   headers: true, // Add rate limit info to response headers
@@ -82,7 +91,7 @@ const limiter = rateLimit({
 });
 
 const loginLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute window
+  windowMs: 60 * 1000, 
   max: 5, // Limit each IP to 100 requests per windowMs
   message: 'Too many requests, please try again later.',
   headers: true, // Add rate limit info to response headers
@@ -96,7 +105,7 @@ const loginLimiter = rateLimit({
 });
 
 const signupLimiter = rateLimit({
-  windowMs: 60 * 1000, // 1 minute window
+  windowMs: 60 * 1000, 
   max: 5, // Limit each IP to 100 requests per windowMs
   message: 'Too many requests, please try again later.',
   headers: true, // Add rate limit info to response headers
