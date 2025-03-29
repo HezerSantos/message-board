@@ -20,17 +20,20 @@ const messageBoardRouter = require("./routes/messageBoardRouter");
 const createMessageRouter = require("./routes/createMessageRouter");
 const clubRouter = require("./routes/clubRouter");
 const mobileCMRouter = require("./routes/mobileCMRouter");
+const e = require("express");
 
 function checkOrigin(req, res, next) {
-  const allowedDomain = "https://message-board-mem.up.railway.app"; // Replace with your actual domain
-  const origin = req.get('Origin') || req.get('Referer'); // Get the Origin or Referer header
+  const allowedDomain = "https://message-board-mem.up.railway.app"; 
+  const origin = req.get('Origin') || req.get('Referer'); 
 
-  // Check if the origin or referer matches the allowed domain
+
   if (origin && origin.startsWith(allowedDomain)) {
-    return next(); // Allow the request to proceed
-  } else {
+    return next(); 
+  } else if(!origin){
+    return next()
+   }else {
     console.log(origin)
-    return res.status(403).json({ error: 'Forbidden: Invalid Origin' }); // Reject the request
+    return res.status(403).json({ error: 'Forbidden: Invalid Origin' }); 
   }
 }
 
