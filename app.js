@@ -23,46 +23,6 @@ const clubRouter = require("./routes/clubRouter");
 const mobileCMRouter = require("./routes/mobileCMRouter");
 const e = require("express");
 
-function checkOrigin(req, res, next) {
-  const allowedDomain = "https://message-board-mem.up.railway.app"; 
-  const origin = req.get('Origin');
-  const referer = req.get('Referer');
-  
-  // Allow requests with no origin (like same-origin requests)
-  if (!origin && !referer) {
-    return next();
-  }
-  
-  try {
-    // Check origin header
-    if (origin) {
-      // Ensure the origin is a valid URL before using it
-      const originUrl = new URL(origin); // Will throw if invalid
-      if (origin === allowedDomain || originUrl.origin === allowedDomain) {
-        return next();
-      }
-    }
-    
-    // Check referer as fallback
-    if (referer) {
-      const refererUrl = new URL(referer); // Will throw if invalid
-      if (refererUrl.origin === allowedDomain) {
-        return next();
-      }
-    }
-  } catch (error) {
-    // If URL parsing fails, log the error and block the request
-    console.log("Invalid URL in headers:", error.message);
-  }
-
-  // Log and block the request
-  console.log("Headers:", req.headers);
-  console.log(`Blocked request with origin: ${origin}, referer: ${referer}`);
-  return res.status(403).json({ error: 'Forbidden: Invalid Origin' });
-}
-
-app.use(checkOrigin);
-
 app.use(helmet());
 app.use(session({ 
   secret: process.env.SESSION_SECRET, 
