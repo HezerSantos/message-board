@@ -21,6 +21,20 @@ const createMessageRouter = require("./routes/createMessageRouter");
 const clubRouter = require("./routes/clubRouter");
 const mobileCMRouter = require("./routes/mobileCMRouter");
 
+function checkOrigin(req, res, next) {
+  const allowedDomain = "https://message-board-mem.up.railway.app"; // Replace with your actual domain
+  const origin = req.get('Origin') || req.get('Referer'); // Get the Origin or Referer header
+
+  // Check if the origin or referer matches the allowed domain
+  if (origin && origin.startsWith(allowedDomain)) {
+    return next(); // Allow the request to proceed
+  } else {
+    return res.status(403).json({ error: 'Forbidden: Invalid Origin' }); // Reject the request
+  }
+}
+
+app.use(checkOrigin)
+
 app.use(helmet());
 app.use(session({ 
   secret: process.env.SESSION_SECRET, 
@@ -37,7 +51,7 @@ app.use(passport.session());
 const limiter = rateLimit({
   windowMs: 60 * 15000, // 1 minute window
   max: 5, // Limit each IP to 100 requests per windowMs
-  message: 'Too many requests, please try again later.',
+  message: 'Too many messages, please try again later.',
   headers: true, // Add rate limit info to response headers
   handler: (req, res) => {
     res.status(429).render("error")
